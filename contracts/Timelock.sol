@@ -9,10 +9,10 @@
 // Ctrl+f for XXX to see all the modifications.
 
 // XXX: pragma solidity ^0.5.16;
-pragma solidity 0.6.12;
+pragma solidity >=0.4.25 <0.7.0;
 
 // XXX: import "./SafeMath.sol";
-import "@pancakeswap/pancake-swap-lib/contracts/math/SafeMath.sol";
+import "./lib/math/SafeMath.sol";
 
 contract Timelock {
     using SafeMath for uint;
@@ -45,8 +45,8 @@ contract Timelock {
         admin_initialized = false;
     }
 
-    // XXX: function() external payable { }
-    receive() external payable { }
+    function() external payable { }
+    // receive() external payable { }
 
     function setDelay(uint delay_) public {
         require(msg.sender == address(this), "Timelock::setDelay: Call must come from Timelock.");

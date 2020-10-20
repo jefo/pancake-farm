@@ -1,8 +1,8 @@
-pragma solidity 0.6.12;
+pragma solidity >=0.4.25 <0.7.0;
 
-import '@pancakeswap/pancake-swap-lib/contracts/math/SafeMath.sol';
-import '@pancakeswap/pancake-swap-lib/contracts/token/BEP20/IBEP20.sol';
-import '@pancakeswap/pancake-swap-lib/contracts/token/BEP20/SafeBEP20.sol';
+import './lib/math/SafeMath.sol';
+import './lib/token/BEP20/IBEP20.sol';
+import './lib/token/BEP20/SafeBEP20.sol';
 
 // import "@nomiclabs/buidler/console.sol";
 
@@ -130,7 +130,7 @@ contract SousChef {
         updatePool();
         syrup.safeTransferFrom(address(msg.sender), address(this), _amount);
         // The deposit behavior before farming will result in duplicate addresses, and thus we will manually remove them when airdropping.
-        if (user.amount == 0 && user.rewardPending == 0 && user.rewardDebt == 0)) {
+        if (user.amount == 0 && user.rewardPending == 0 && user.rewardDebt == 0) {
             addressList.push(address(msg.sender));
         }
         user.rewardPending = user.amount.mul(poolInfo.accRewardPerShare).div(1e12).sub(user.rewardDebt).add(user.rewardPending);
